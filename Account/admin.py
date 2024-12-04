@@ -1,5 +1,8 @@
 from django.contrib import admin
 from .models import test_table, Main_test
+from .models import CustomUser
+from django.contrib.auth.admin import UserAdmin
+from django.utils.html import format_html
 
 # Register your models here.
 
@@ -27,3 +30,27 @@ class TestTableAdmin(admin.ModelAdmin):
 
 
 admin.site.register(test_table, TestTableAdmin)
+
+
+class CustomUserAdmin(UserAdmin):
+    model = CustomUser
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {'fields': ('phone_number', 'image')}),
+    )
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (None, {'fields': ('phone_number', 'image')}),
+    )
+
+    def user_image(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="width: 50px; height: 50px;" />', obj.image.url)
+        return "No Image"
+
+    user_image.short_description = 'Image'
+
+    list_display = ('username', 'email', 'phone_number', 'user_image')
+    list_filter = ('phone_number',)  # Add filters for phone numbers if needed
+    search_fields = ('username', 'email', 'phone_number')
+
+
+admin.site.register(CustomUser, CustomUserAdmin)
