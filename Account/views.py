@@ -1,5 +1,6 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import CustomUser 
+from .models import CustomUser, Counter
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 
@@ -24,6 +25,8 @@ def login(request):
     return render(request, 'auth/login.html')
 
 
+
+
 def reg(request):
     if request.method == "POST":
         first_name = request.POST.get('fname')
@@ -40,17 +43,42 @@ def reg(request):
         elif password != password1:
             messages.error(request, "Passwords do not match.")
         else:
-            user = CustomUser (
-                first_name=first_name,
-                last_name=last_name,
-                username=username,
-                email=email,
-                phone_number=number,
-                image=image
-            )
-            user.set_password(password)
-            user.save()
-            messages.success(request, "Account created successfully.")
-            return redirect('login')
+            try:
+                user = CustomUser (
+                    first_name=first_name,
+                    last_name=last_name,
+                    username=username,
+                    email=email,
+                    phone_number=number,
+                    image=image
+                )
+                user.set_password(password)
+                user.save()
+                messages.success(request, "Account created successfully.")
+                return redirect('login')
+            except Exception as e:
+                messages.error(request, str(e))
+                return redirect('reg')
 
     return render(request, 'auth/registration.html')
+      
+
+def page(request):
+    return render(request, 'counter.html')
+
+
+def get_counter(request):
+    counter = Counter.objects.get(id=1)  
+    return JsonResponse({'value': counter.value})
+
+def increment_counter(request):
+    counter = Counter.objects.get(id=1)
+    counter.value += 1
+    counter.save()
+    return JsonResponse({'value': counter.value})
+
+def decrement_counter(request):
+    counter = Counter.objects.get(id=1)
+    counter.value -= 1
+    counter.save()
+    return JsonResponse({'value': counter.value})

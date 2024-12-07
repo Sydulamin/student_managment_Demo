@@ -10,25 +10,6 @@ class CustomUser(AbstractUser):
         return self.username
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Main_test(models.Model):
     Father_name = models.CharField(max_length=10)
     Mother_name = models.CharField(max_length=10)
@@ -54,3 +35,11 @@ class test_table(models.Model):
             return self.name
         else:
             return f"{self.parents.Father_name}'s Sons and nationality is {self.parents.Nationality} "
+
+
+
+class Counter(models.Model):
+    value = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.value)
