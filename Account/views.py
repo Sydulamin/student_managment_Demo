@@ -9,7 +9,7 @@ def home(request):
 
 def login(request):
     if request.method == "POST":
-        username = request.POST.get('uname')
+        username = request.POST.get('uname') 
         password = request.POST.get('pass1')
 
         if username and password:
