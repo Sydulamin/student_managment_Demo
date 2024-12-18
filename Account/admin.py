@@ -49,7 +49,7 @@ class CustomUserAdmin(UserAdmin):
 
     user_image.short_description = 'Image'
 
-    list_display = ('username', 'email', 'phone_number', 'user_image')
+    list_display = ('username', 'email', 'phone_number', 'user_image', 'is_verified')
     list_filter = ('phone_number',)  # Add filters for phone numbers if needed
     search_fields = ('username', 'email', 'phone_number')
 

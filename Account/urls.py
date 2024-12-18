@@ -9,4 +9,5 @@ urlpatterns = [
     path('increment-counter/', increment_counter, name='increment_counter'),
     path('decrement-counter/', decrement_counter, name='decrement_counter'),
     path('page/', page, name='page'),
+    path('otp_verify/', otp_verify, name='otp_verify'),
 ]
