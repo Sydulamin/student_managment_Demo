@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import test_table, Main_test, Counter
+from .models import test_table, Main_test, Counter, address
 from .models import CustomUser
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
@@ -8,6 +8,7 @@ from django.utils.html import format_html
 
 admin.site.register(Main_test)
 admin.site.register(Counter)
+admin.site.register(address)
 
 
 class TestTableAdmin(admin.ModelAdmin):

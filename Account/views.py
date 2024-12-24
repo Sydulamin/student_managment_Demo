@@ -2,17 +2,28 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import CustomUser, Counter
 from django.contrib import messages
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout
 from django.core.mail import send_mail
 import random
 from django.conf import settings
 
 
 def home(request):
+    if request.user.is_authenticated:
+        pass
+    else:
+        messages.error(request, "Please login first.")
+        return redirect('login')
+
     return render(request, 'home/home.html')
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        pass
+
     if request.method == "POST":
         username = request.POST.get('uname')
         password = request.POST.get('pass1')
@@ -33,7 +44,17 @@ def login(request):
     return render(request, 'auth/login.html')
 
 
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
+
 def reg(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        pass
+
     if request.method == "POST":
         first_name = request.POST.get('fname')
         last_name = request.POST.get('lname')
