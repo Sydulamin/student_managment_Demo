@@ -10,5 +10,8 @@ urlpatterns = [
     path('decrement-counter/', decrement_counter, name='decrement_counter'),
     path('page/', page, name='page'),
     path('otp_verify/', otp_verify, name='otp_verify'),
+<<<<<<< HEAD
     path('logout_user/', logout_user, name='logout_user'),
+=======
+>>>>>>> 5b4fadeb83ccad2dcf8c139071b63e812db12624
 ]

@@ -2,7 +2,11 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import CustomUser, Counter
 from django.contrib import messages
+<<<<<<< HEAD
 from django.contrib.auth import authenticate, login as auth_login, logout
+=======
+from django.contrib.auth import authenticate, login as auth_login
+>>>>>>> 5b4fadeb83ccad2dcf8c139071b63e812db12624
 from django.core.mail import send_mail
 import random
 from django.conf import settings
@@ -44,11 +48,14 @@ def login(request):
     return render(request, 'auth/login.html')
 
 
+<<<<<<< HEAD
 def logout_user(request):
     logout(request)
     return redirect('login')
 
 
+=======
+>>>>>>> 5b4fadeb83ccad2dcf8c139071b63e812db12624
 def reg(request):
     if request.user.is_authenticated:
         return redirect('home')

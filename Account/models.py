@@ -4,7 +4,11 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=15, blank=True, null=True)
+<<<<<<< HEAD
     image = models.ImageField(upload_to='profile_image/', default='def.png', max_length=255, null=True, blank=True)
+=======
+    image = models.ImageField(upload_to='profile_image/', default='def.png',max_length=255, null=True, blank=True)
+>>>>>>> 5b4fadeb83ccad2dcf8c139071b63e812db12624
     otp = models.PositiveIntegerField(null=True, blank=True)
     is_verified = models.BooleanField(default=False)
 
@@ -44,6 +48,7 @@ class Counter(models.Model):
 
     def __str__(self):
         return str(self.value)
+<<<<<<< HEAD
 
 
 class address(models.Model):
@@ -57,3 +62,5 @@ class address(models.Model):
 
     def __str__(self):
         return f'{self.user.username}"s Address'
+=======
+>>>>>>> 5b4fadeb83ccad2dcf8c139071b63e812db12624
